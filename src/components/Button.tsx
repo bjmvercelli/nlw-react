@@ -1,9 +1,14 @@
-type ButtonProps = { //Definição de tipagem para TypeScript 
-    text?: string; //o '?' implica que a propriedade é opcional
-}
+import { useState } from "react"
 
-export function Button(props: ButtonProps) {
+export function Button() {
+
+    const [counter, setCounter] = useState(0);
+
+    const handleClick = () => {
+        setCounter(counter + 1);
+    }
+
     return (
-        <button>{props.text || 'Default'}</button>
+        <button onClick={handleClick}>{counter}</button>
     )
 }
