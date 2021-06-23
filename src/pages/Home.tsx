@@ -1,7 +1,6 @@
-import { useContext } from 'react'; //recupera o valor de um contexto
 import { useHistory } from 'react-router-dom';
 
-import { AuthContext } from '../App';
+import { useAuth } from '../hooks/useAuth';
 import { Button } from '../components/Button';
 
 import illustrationImg from '../assets/images/illustration.svg';
@@ -14,7 +13,7 @@ import '../styles/auth.scss';
 export function Home() {
     
     let history = useHistory();
-    const {user, signInWithGoogle} = useContext(AuthContext);
+    const {user, signInWithGoogle} = useAuth();
 
 
     async function handleCreateRoom() {
