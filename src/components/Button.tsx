@@ -1,14 +1,12 @@
-import { useState } from "react"
+import { ButtonHTMLAttributes } from 'react'; //todos os possíveis atributos que um botão pode receber
 
-export function Button() {
+import '../styles/button.scss';
 
-    const [counter, setCounter] = useState(0);
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>; //passamos entre <> a tipagem do elemento do botão (é global)
 
-    const handleClick = () => {
-        setCounter(counter + 1);
-    }
+export function Button(props: ButtonProps) {
 
     return (
-        <button onClick={handleClick}>{counter}</button>
+        <button className="button" {...props}/>
     )
 }
