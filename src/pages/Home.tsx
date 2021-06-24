@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useTheme } from '../hooks/useTheme';
 
 import { useAuth } from '../hooks/useAuth';
 import { Button } from '../components/Button';
@@ -17,6 +18,7 @@ export function Home() {
     const {user, signInWithGoogle} = useAuth();
     const [roomCode, setRoomCode] = useState('');
 
+    const {theme, toggleTheme} = useTheme();
 
     async function handleCreateRoom() {
         if (!user){
@@ -44,7 +46,7 @@ export function Home() {
     }
 
     return (
-        <div id="page-auth">
+        <div id="page-auth" className={theme}>
             <aside>
                 <img src={illustrationImg} alt="Ilustração de perguntas e respostas" />
                 <strong>Crie salas de Q&amp;A ao-vivo</strong>
@@ -52,6 +54,8 @@ export function Home() {
             </aside>
             <main>
                 <div className="main-content">
+                    <button onClick={toggleTheme}>Toggle</button>
+                    
                     <img src={logoImg} alt="Letmeask logo" />
                     <button onClick={handleCreateRoom} className="create-room">
                         <img src={googleImg} alt="Logo do google" />
