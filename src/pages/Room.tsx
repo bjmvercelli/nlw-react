@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom' //permite pegar os parametros da ur
 
 import { Button } from '../components/Button';
 import { RoomCode } from '../components/RoomCode';
+import { Question } from '../components/Question';
 import { useAuth } from '../hooks/useAuth';
 import { database } from '../services/firebase';
 
@@ -24,7 +25,7 @@ type RoomParams = {
     id: string;
 }
 
-type Question = {
+type QuestionType = {
     id: string;
     author: {
         name: string;
@@ -42,7 +43,7 @@ export function Room() {
 
     const [newQuestion, setNewQuestion] = useState('');
 
-    const [questions, setQuestions] = useState<Question[]>([]); //<> -> generic
+    const [questions, setQuestions] = useState<QuestionType[]>([]); //<> -> generic
     const [title, setTitle] = useState('');
 
     useEffect(() => {
@@ -128,7 +129,13 @@ export function Room() {
                     </div>
                 </form>
 
-                {JSON.stringify(questions)}
+                <div className="question-list">
+                    {questions.map(question => {
+                        return (
+                            <Question key={question.id} content={question.content} author={question.author} />
+                        );
+                    })}
+                </div>
             </main>
         </div>
     );
