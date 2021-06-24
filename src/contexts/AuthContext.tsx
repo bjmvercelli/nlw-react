@@ -1,6 +1,8 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { auth, firebase } from "../services/firebase";
 
+//Um pouco mais sobre context: https://gist.github.com/diego3g/142a2a86de5356d074674ac0a91dcf27
+
 type User = {
     id: string;
     name: string;
@@ -16,7 +18,7 @@ type AuthContextProviderProps = {
     children: ReactNode; //Como estamos recebendo componentes React, devemos utilizar o ReactNode
 }
 
-export const AuthContext = createContext({} as AuthContextType);
+export const AuthContext = createContext({} as AuthContextType); //o 'as AuthContextType' pode ser substituido por createContext<AuthContextType>({})
 
 export function AuthContextProvider(props: AuthContextProviderProps) { //recebemos as rotas do App (childrens)
     const [user, setUser] = useState<User>();
