@@ -13,6 +13,16 @@
             >img {
                 max-height: 45px;
             }
+
+            >div {
+                display: flex;
+                gap: 16px; //adiciona espaçamento entre os elementos de dentro de um display flex ou grid
+
+                button {
+                    height: 40px;
+
+                }
+            }
         }
     }
 
