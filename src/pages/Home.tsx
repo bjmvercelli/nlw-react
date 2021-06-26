@@ -42,6 +42,11 @@ export function Home() {
             return;
         }
 
+        if (roomRef.val().endedAt) { //se existir o ""atributo""" endedAt no room é porque ele foi encerrado
+            alert('Room already closed.');
+            return;
+        }
+
         history.push(`/rooms/${roomCode}`);
     }
 

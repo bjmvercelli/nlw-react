@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import '../styles/question.scss';
 
 type QuestionProps = {
@@ -6,9 +8,10 @@ type QuestionProps = {
         name: string;
         avatar: string;
     }
+    children?: ReactNode;
 }
 
-export function Question({content, author}: QuestionProps) { //ao invés de utilizar props: QuestionProps, desestruturamos o props para pegar o que será utilizado
+export function Question({content, author, children}: QuestionProps) { //ao invés de utilizar props: QuestionProps, desestruturamos o props para pegar o que será utilizado
     return (
         <div className="question">
             <p>{content}</p>
@@ -17,7 +20,9 @@ export function Question({content, author}: QuestionProps) { //ao invés de util
                     <img src={author.avatar} alt={author.name} />
                     <span>{author.name}</span>
                 </div>
-                <div></div>
+                <div>
+                    {children}
+                </div>
             </footer>
         </div>
     );

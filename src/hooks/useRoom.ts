@@ -1,6 +1,7 @@
 //Nesse hook abstraimos a lógica de carregamento da sala em um arquivo específico, que pode ser reutilizado também na hora de fazer a página do admin
 import { useEffect, useState } from "react";
 import { database } from "../services/firebase";
+import { useAuth } from "./useAuth";
 
 type FirebaseQuestions = Record<string, { //Record é usado para declarar tipagem de um objeto, em que nesse caso a chave é uma string e o valor é outro objeto
     author: {
@@ -10,6 +11,9 @@ type FirebaseQuestions = Record<string, { //Record é usado para declarar tipage
     content: string;
     isAnswered: boolean;
     isHighlighted: boolean;
+    likes: Record<string, { //objeto em que a chave é o id do like e o valor é um objeto que tem authorId 
+        authorId: string;
+    }> 
 }>
 
 type QuestionType = {
@@ -21,9 +25,12 @@ type QuestionType = {
     content: string;
     isAnswered: boolean;
     isHighlighted: boolean;
+    likeCount: number;
+    likeId: string | undefined;
 }
 
 export function useRoom(roomId: string) {
+    const { user } = useAuth();
     const [questions, setQuestions] = useState<QuestionType[]>([]); //<> -> generic
     const [title, setTitle] = useState('');
 
@@ -40,14 +47,21 @@ export function useRoom(roomId: string) {
                     content: value.content,
                     author: value.author,
                     isHighlighted: value.isHighlighted,
-                    isAnswered: value.isAnswered
+                    isAnswered: value.isAnswered,
+                    likeCount: Object.values(value.likes ?? {}).length, //queremos só os values do array retornado, por isso usamos values() e não entries()
+                    likeId: Object.entries(value.likes ?? {}).find(([key, like]) => like.authorId === user?.id)?.[0] //SE (?.) encontrar o like do usuario naquela pergunta, retorna o id desse like (que será o primeiro ([0]) encontrado)
                 };
             });
 
             setTitle(databaseRoom.title);
             setQuestions(parsedQuestions);
-        })
-    }, [roomId]); 
+        });
+
+        return () => {
+            roomRef.off('value'); //remove os event listeners
+        }
+
+    }, [roomId, user?.id]); 
 
     return {questions, title}
 }
