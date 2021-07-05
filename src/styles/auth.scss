@@ -38,7 +38,7 @@
     }
 
     main {
-        flex: 10; //Ocupa tres unidades a mais de flex que o aside
+        flex: 9; //Ocupa duas unidades a mais de flex que o aside
 
         padding: 0 32px;
 
@@ -51,14 +51,27 @@
     .main-content {
         display: flex;
         flex-direction: column;
+        height: 100%;
         width: 100%;
-        max-width: 320px;
+        max-width: 350px;
         align-items: stretch; //elementos esticam para caber na largura total
         text-align: center;
+
+
+        .github-img {
+            margin-left: auto;
+            height: 300px;
+            margin-top: 50px;
+
+            img {
+                width: 50px;
+            }
+        }
 
         > img { //seleciona apenas a imagem que está diretamente dentro do main-content (a logo, no caso). Se colocasse apenas "img" pegaria também a logo do google
             align-self: center; //para não esticar a imagem
         }
+
 
         h2 {
             font-size: 24px;

@@ -60,7 +60,11 @@ export function Home() {
             </aside>
             <main>
                 <div className="main-content">
-                    <img src={githubImg} alt="Github logo" />
+                    <div className="github-img">
+                        <a href="https://github.com/bjmvercelli" target="_blank">
+                            <img src={githubImg} alt="Github logo" />
+                        </a>
+                    </div>
                     <img src={logoImg} alt="Letmeask logo" />
                     <button onClick={handleCreateRoom} className="create-room">
                         <img src={googleImg} alt="Logo do google" />
