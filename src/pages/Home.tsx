@@ -9,6 +9,7 @@ import { database } from '../services/firebase';
 import illustrationImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
 import googleImg from '../assets/images/google-icon.svg';
+import githubImg from '../assets/images/github.svg';
 
 import '../styles/auth.scss';
 
@@ -59,7 +60,7 @@ export function Home() {
             </aside>
             <main>
                 <div className="main-content">
-                    
+                    <img src={githubImg} alt="Github logo" />
                     <img src={logoImg} alt="Letmeask logo" />
                     <button onClick={handleCreateRoom} className="create-room">
                         <img src={googleImg} alt="Logo do google" />
