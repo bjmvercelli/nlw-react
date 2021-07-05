@@ -59,7 +59,7 @@ export function Home() {
             </aside>
             <main>
                 <div className="main-content">
-                    <button onClick={toggleTheme}>Toggle</button>
+                    <button onClick={toggleTheme}>Alterar</button>
                     
                     <img src={logoImg} alt="Letmeask logo" />
                     <button onClick={handleCreateRoom} className="create-room">
