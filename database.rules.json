@@ -1,0 +1,20 @@
+{
+  "rules": {
+    "rooms": {
+      ".read": false, //não há funcionalidade de listagem de todas as salas
+      ".write": "auth != null", //para criar novas salas o usuário precisa estar autenticado
+      "$roomId": { //quando o usuário estiver interagindo com uma sala específica (e não com todas elas)
+        ".read": true, //pode ler dados de uma sala específica
+        ".write": "auth != null && (!data.exists() || data.child('authorId').val() == auth.id)", //usuário deve estar autenticado e ser o dono (auth.id == data.child(...) - aqui pegamos os dados da sala) da sala para alterar os dados. Essa verificação só ocorre caso a sala ja exista, se não poderá ser criada normalmente
+      	"questions": {
+          ".read": true, //qualquer usuário pode ler as perguntas daquela sala
+          ".write": "auth != null && (!data.exists() || data.parent().child('authorId').val() == auth.id)", //para alterar a pergunta (deletar, marcar como respondida), a pessoa precisa ser quem criou o room (parent - nesse caso $roomId é parent). Só executa caso a questao já exista. se não poderá ser criada normalmente
+        	"likes": {
+            ".read": true,
+            ".write": "auth != null && (!data.exists() || data.child('authorId').val() == auth.id)"  
+          }
+        }
+      }
+    }
+  }
+}
